@@ -1,0 +1,4 @@
+[submodule "ASN1TestUnit/googletest"]
+	path = ASN1TestUnit/googletest
+	url = https://github.com/mikee2509/googletest.git
+	branch = mygoogletest
