@@ -5,7 +5,10 @@ using namespace std;
 int main()
 {
     cout << "Hello world!" << endl;
-    Student nowy(3);
-    cout << nowy.getNo() << endl;
+    ASNInteger a;
+    vector<char> vref = a.taglength(12,36);
+    vector<char>::iterator it;
+    for (it=vref.begin(); it<vref.end(); it++)
+        cout << *it;
     return 0;
 }
