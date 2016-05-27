@@ -2,7 +2,7 @@
 
 using namespace std;
 
-vector<char> ASNObject::taglength(int tag, int length, bool isConstructed)
+vector<char> ASNObject::taglength(int tag, int length, bool isConstructed, bool isIndefinite)
 {
     if (tag>31 || tag<0) throw invalid_argument("Invalid tag number");
     if (length<0 || length>127) throw invalid_argument("Invalid length");
@@ -12,6 +12,7 @@ vector<char> ASNObject::taglength(int tag, int length, bool isConstructed)
     for(int i=0; i<8; i++)
         data.push_back(bin[i]);
     bin = bitset<8>(length).to_string();
+    if(isIndefinite) bin[0]='1';
     for(int i=0; i<8; i++)
         data.push_back(bin[i]);
     return data;
