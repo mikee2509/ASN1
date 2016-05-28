@@ -32,8 +32,27 @@ TEST(ASNObjectTests, taglengthTest)
 
 TEST(ASNIntegerTests, serializeTest)
 {
-    ASNInteger wiek(16);
-    vector<char> wiekVect = wiek.serialize();
-    string wiekStr(wiekVect.begin(), wiekVect.end());
-    EXPECT_EQ(wiekStr, "000000100000000100010000");
+    ASNInteger a(16);
+    vector<char> aVect = a.serialize();
+    string aStr(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "000000100000000100010000");
+
+    a = 13565;
+    aVect = a.serialize();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "00000010000000100011010011111101");
+
+    a = 8123456;
+    aVect = a.serialize();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "0000001000000011011110111111010001000000");
+
+    a = 1234567890;
+    ASNInteger newA(a);
+    aVect = newA.serialize();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "000000100000010001001001100101100000001011010010");
 }
+
+
+

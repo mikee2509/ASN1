@@ -10,12 +10,13 @@ class ASNObject
 {
 protected:
     std::vector<char> data;
-    int tag;
-    int length;
+    int tag; //!< ASN.1 type tag
+    int length; //!< Number of octets needed to encode data
 public:
-    //ASNObject();
+    /*! Function encodes tag, length and value of ASN.1 Object according to BER standard
+    \return STL vector of characters with encoded data */
     virtual std::vector<char> serialize() = 0;
-    virtual void deserialize(char* buffer) = 0;
+    virtual void deserialize(const std::vector<char> &buffer) = 0;
 
     //! Function returning identifier and length octets.
     /*! These two octets give information about each ASN.1 data structure.
