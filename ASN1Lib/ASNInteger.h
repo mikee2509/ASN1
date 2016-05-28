@@ -8,11 +8,12 @@ class ASNInteger : public ASNObject
 {
 private:
     int number;
+    int tag = 2;
 public:
-//    ASNInteger();
-//    virtual ~ASNInteger();
+    ASNInteger(int n);
+    //virtual ~ASNInteger();
 
-    virtual void serialize(char *buffer);
+    virtual std::vector<char> serialize();
     virtual void deserialize(char *buffer);
 };
 

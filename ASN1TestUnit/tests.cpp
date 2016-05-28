@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 
 long tlcheck(int tag, int length, bool isConstructed=0, bool isIndefinite=0)
 {
-    ASNInteger one;
+    ASNInteger one(0);
     stringstream stream;
     long check;
     vector<char> temp = one.taglength(tag, length, isConstructed, isIndefinite);
@@ -28,4 +28,12 @@ TEST(ASNObjectTests, taglengthTest)
     EXPECT_EQ(tlcheck(10, 30), 101000011110);
     EXPECT_EQ(tlcheck(12, 8), 110000001000);
     EXPECT_EQ(tlcheck(16, 89, 1, 1), 11000011011001);
+}
+
+TEST(ASNIntegerTests, serializeTest)
+{
+    ASNInteger wiek(16);
+    vector<char> wiekVect = wiek.serialize();
+    string wiekStr(wiekVect.begin(), wiekVect.end());
+    EXPECT_EQ(wiekStr, "000000100000000100010000");
 }

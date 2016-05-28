@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="ASN1Workspace">
+		<Project filename="ASN1Lib/ASN1Lib.cbp" />
+		<Project filename="ASN1TestUnit/ASN1TestUnit.cbp" active="1">
+			<Depends filename="ASN1Lib/ASN1Lib.cbp" />
+		</Project>
+		<Project filename="ASN1Run/ASN1Run.cbp">
+			<Depends filename="ASN1Lib/ASN1Lib.cbp" />
+		</Project>
+	</Workspace>
+</CodeBlocks_workspace_file>

@@ -8,13 +8,13 @@
 //! Base class for all ASN.1 types' objects
 class ASNObject
 {
-private:
+protected:
     std::vector<char> data;
     int tag;
     int length;
 public:
     //ASNObject();
-    virtual void serialize(char* buffer) = 0;
+    virtual std::vector<char> serialize() = 0;
     virtual void deserialize(char* buffer) = 0;
 
     //! Function returning identifier and length octets.
