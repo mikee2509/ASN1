@@ -16,20 +16,24 @@ protected:
     bool isConstructed; //!< Whether the contents octets contain 0, 1, or more element encodings
     bool isIndefinite; //!< Whether the length is defined or the content octets finish at marker octets
 public:
-    /*! \brief Function encodes tag, length and value of ASN.1 Object according to BER standard
-               and saves the results in *data*. */
+    //! Encodes tag, length and value of ASN.1 Object according to BER standard.
+    /*! The results are saved in *data* vector. */
     virtual void serialize() = 0;
+
+    //! Reads the encoded data from *buffer* and changes the object's attributes values.
     virtual void deserialize(const std::vector<char> &buffer) = 0;
 
-    //! Function returning identifier and length octets.
+    //! Returns identifier and length octets.
     /*! These two octets give information about each ASN.1 data structure. */
     std::vector<char> taglength(int tag, int length, bool isConstructed=0, bool isIndefinite=0);
 
-    void taglength(const std::vector<char> &tags);
+    //! Sets object's attributes based on given encoded octets.
+    /*! Function modifies *length*, *isConstructed* and *isIndefinite* values. */
+    void taglength(const std::vector<char> &code);
 
-    int getLength() { return length; } //!< Returns the length of the object
-    int getTag() { return tag; } //!< Returns object's tag
-    std::vector<char> getData() { return data; } //!< Gives access to object's data
+    int getLength() { return length; }
+    int getTag() { return tag; }
+    std::vector<char> getData() { return data; }
     bool getConstructed() { return isConstructed; }
     bool getIndefinite() { return isIndefinite; }
 };

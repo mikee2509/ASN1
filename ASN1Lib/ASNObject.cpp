@@ -32,7 +32,7 @@ void ASNObject::taglength(const vector<char> &code)
     bitset<5> bintag;
     for(int i=3, j=4; i<8; i++, j--)
         bintag.set(j, code[i]-'0');
-    if(tag != bintag.to_ulong()) throw invalid_argument("Tag doesn't match the object's type");
+    if((unsigned)tag != bintag.to_ulong()) throw invalid_argument("Tag doesn't match the object's type");
 
     bitset<7> binlength;
     for(int i=9, j=6; i<16; i++, j--)

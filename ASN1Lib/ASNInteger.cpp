@@ -43,7 +43,7 @@ ASNInteger ASNInteger::operator=(int newValue)
 
 void ASNInteger::serialize()
 {
-    data = taglength(tag, length, 0, 0);
+    data = taglength(tag, length, isConstructed, isIndefinite);
     const int len = length*8;
     string bin = bitset<32>(number).to_string();
     for(int i=32-len; i<32; i++)

@@ -3,7 +3,7 @@
 
 #include "ASNObject.h"
 
-
+//! ASN.1 INTEGER data type
 class ASNInteger : public ASNObject
 {
 private:

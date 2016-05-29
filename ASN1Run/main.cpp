@@ -6,12 +6,10 @@ int main()
 {
     try
     {
-        ASNInteger a;
-        vector<char> aVect {'0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','1','0','0','0','1','0','0','0','0'};
-        a.deserialize(aVect);
-        cout << "Tag: " << a.getTag() << endl;
-        cout << "Length: " << a.getLength() << endl;
-        cout << "Number: " << a.getNumber() << endl;
+        string lols = "a";
+        ASNUTF8String nowy(lols);
+        vector<char> temp = nowy.getData();
+        for_each(temp.begin(), temp.end(), [](char i)->void { cout<<i; });
     }
     catch (exception &e)
     {
