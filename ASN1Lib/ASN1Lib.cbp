@@ -40,6 +40,8 @@
 		<Compiler>
 			<Add option="-std=c++11" />
 		</Compiler>
+		<Unit filename="ASNBitstring.cpp" />
+		<Unit filename="ASNBitstring.h" />
 		<Unit filename="ASNInteger.cpp" />
 		<Unit filename="ASNInteger.h" />
 		<Unit filename="ASNObject.cpp" />

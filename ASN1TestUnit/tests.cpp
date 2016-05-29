@@ -123,8 +123,26 @@ TEST(ASNUTF8StringTests, deserializeTest)
     EXPECT_EQ(str.getStr(), string("Mike"));
 }
 
+TEST(ASNBitstringTests, serializeTest)
+{
+    string str = "10101010111100001";
+    ASNBitstring one(str);
+    vector <char> test {'0','0','0','0','0','0','1','1',
+                        '0','0','0','0','0','1','0','0',
+                        '0','0','0','0','0','1','1','1',
+                        '1','0','1','0','1','0','1','0',
+                        '1','1','1','1','0','0','0','0',
+                        '1','0','0','0','0','0','0','0'};
+    EXPECT_EQ(one.getData(), test);
 
-
+    str = "101";
+    one = str;
+    test = {'0','0','0','0','0','0','1','1',
+            '0','0','0','0','0','0','1','0',
+            '0','0','0','0','0','1','0','1',
+            '1','0','1','0','0','0','0','0'};
+    EXPECT_EQ(one.getData(), test);
+}
 
 
 
