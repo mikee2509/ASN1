@@ -4,16 +4,17 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
-    ASNInteger a(0);
-    vector<char> vref = a.taglength(12,36);
-    vector<char>::iterator it;
-    for (it=vref.begin(); it<vref.end(); it++)
-        cout << *it;
-cout << endl << endl;
-    ASNInteger wiek(16);
-    vector<char> temp = wiek.serialize();
-    for(it=temp.begin(); it<temp.end(); it++)
-        cout << *it;
-    return 0;
+    try
+    {
+        ASNInteger a;
+        vector<char> aVect {'0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','1','0','0','0','1','0','0','0','0'};
+        a.deserialize(aVect);
+        cout << "Tag: " << a.getTag() << endl;
+        cout << "Length: " << a.getLength() << endl;
+        cout << "Number: " << a.getNumber() << endl;
+    }
+    catch (exception &e)
+    {
+        cout << e.what() << endl;
+    }
 }
