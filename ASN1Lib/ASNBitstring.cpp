@@ -48,7 +48,30 @@ void ASNBitstring::serialize()
 
 void ASNBitstring::deserialize(const vector<char>& buffer)
 {
-//    string binoffset(buffer.begin(), buffer.begin()+8);
-//    int offset = bitset<8>(binoffset).to_ulong();
-//    if(offset<0 || offset>8) throw invalid_argument("Invalid offset value");
+    int initialLength = length;
+
+    vector<char> initialOctets(buffer.begin(), buffer.begin()+16);
+    taglength(initialOctets);
+
+    if(isConstructed) {
+        length = initialLength;
+        isConstructed = 0;
+        isIndefinite = 0;
+        throw invalid_argument("ASN.1 Bitstring cannot be constructed");
+    }
+    if(isIndefinite) {
+        length = initialLength;
+        isConstructed = 0;
+        isIndefinite = 0;
+        throw invalid_argument("ASN.1 Bitstring must be of definite length");
+    }
+
+    strCheck(string(buffer.begin()+16, buffer.end()));
+
+    string binoffset(buffer.begin()+16, buffer.begin()+24);
+    int offset = bitset<8>(binoffset).to_ulong();
+    if(offset<0 || offset>8) throw invalid_argument("Invalid offset value");
+
+    data = vector<char>(buffer.begin(), buffer.begin()+16+8*length);
+    str = string(buffer.begin()+24, buffer.begin()+24+8*(length-1)-offset);
 }

@@ -51,6 +51,8 @@ void ASNUTF8String::deserialize(const vector<char>& buffer)
         character = bitset<8>(binary).to_ulong();
         str.push_back(character);
     }
+    data = initialOctets;
+    data.insert(data.end(), dataOctets.begin(), dataOctets.end());
 }
 
 void ASNUTF8String::serialize()
