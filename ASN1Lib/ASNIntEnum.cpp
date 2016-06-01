@@ -1,8 +1,8 @@
-#include "ASNInteger.h"
+#include "ASNIntEnum.h"
 
 using namespace std;
 
-void ASNInteger::setLength(int n)
+void ASNIntEnum::setLength(int n)
 {
     if(n>=-128 && n<=127) length = 1;
     else if(n>=-32768 && n<=32767) length = 2;
@@ -11,17 +11,17 @@ void ASNInteger::setLength(int n)
     else throw length_error("Maximal integer size is 4 bytes");
 }
 
-ASNInteger::ASNInteger(int n)
+ASNIntEnum::ASNIntEnum(int tagvalue, int n)
 {
     number = n;
-    tag = 2;
+    tag = tagvalue;
     isConstructed = 0;
     isIndefinite = 0;
     setLength(number);
     serialize();
 }
 
-ASNInteger::ASNInteger(const ASNInteger &asnint)
+ASNIntEnum::ASNIntEnum(const ASNIntEnum &asnint)
 {
     number = asnint.number;
     length = asnint.length;
@@ -32,7 +32,7 @@ ASNInteger::ASNInteger(const ASNInteger &asnint)
     serialize();
 }
 
-ASNInteger ASNInteger::operator=(int newValue)
+ASNIntEnum ASNIntEnum::operator=(int newValue)
 {
     number = newValue;
     setLength(number);
@@ -41,7 +41,7 @@ ASNInteger ASNInteger::operator=(int newValue)
     return *this;
 }
 
-void ASNInteger::serialize()
+void ASNIntEnum::serialize()
 {
     data = taglength(tag, length, isConstructed, isIndefinite);
     const int len = length*8;
@@ -50,7 +50,7 @@ void ASNInteger::serialize()
         data.push_back(bin[i]);
 }
 
-void ASNInteger::deserialize(const vector<char> &buffer)
+void ASNIntEnum::deserialize(const vector<char> &buffer)
 {
     int initialLength = length;
 
@@ -82,5 +82,4 @@ void ASNInteger::deserialize(const vector<char> &buffer)
 
     data = initialOctets;
     data.insert(data.end(), dataOctets.begin(), dataOctets.end());
-
 }

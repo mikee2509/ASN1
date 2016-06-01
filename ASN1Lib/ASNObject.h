@@ -6,7 +6,7 @@
 #include <exception>
 #include <algorithm>
 
-//! Base class for all ASN.1 types' objects
+//! Base class for all ASN.1 structures
 class ASNObject
 {
 protected:

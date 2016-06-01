@@ -44,14 +44,22 @@
 		</Compiler>
 		<Unit filename="ASNBitstring.cpp" />
 		<Unit filename="ASNBitstring.h" />
-		<Unit filename="ASNInteger.cpp" />
+		<Unit filename="ASNEnumerated.h" />
+		<Unit filename="ASNIntEnum.cpp" />
+		<Unit filename="ASNIntEnum.h" />
 		<Unit filename="ASNInteger.h" />
 		<Unit filename="ASNObject.cpp" />
 		<Unit filename="ASNObject.h" />
 		<Unit filename="ASNUTF8String.cpp" />
 		<Unit filename="ASNUTF8String.h" />
+		<Unit filename="interfaces/IASNBitstring.cpp" />
+		<Unit filename="interfaces/IASNBitstring.h" />
+		<Unit filename="interfaces/IASNEnumerated.cpp" />
+		<Unit filename="interfaces/IASNEnumerated.h" />
 		<Unit filename="interfaces/IASNInteger.cpp" />
 		<Unit filename="interfaces/IASNInteger.h" />
+		<Unit filename="interfaces/IASNUTF8String.cpp" />
+		<Unit filename="interfaces/IASNUTF8String.h" />
 		<Unit filename="interfaces/IDisplayable.cpp" />
 		<Unit filename="interfaces/IDisplayable.h" />
 		<Extensions>

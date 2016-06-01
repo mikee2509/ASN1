@@ -1,28 +1,16 @@
 #ifndef ASNINTEGER_H
 #define ASNINTEGER_H
 
-#include "ASNObject.h"
+#include "ASNIntEnum.h"
 
 //! ASN.1 INTEGER data type
-class ASNInteger : virtual public ASNObject
+class ASNInteger : public ASNIntEnum
 {
-protected:
-    int number; //!< Decimal integer
-
-    void setLength(int decimalNum); //!< Calculates length from decimal number passed in argument
 public:
     //! Standard constructor
     /*! Creates new object with appropriate length
         \param n : number to be saved in object */
-    ASNInteger(int n=0);
-
-    ASNInteger(const ASNInteger &asnint); //!< Copy constructor
-    ASNInteger operator=(int newValue); //!< Assigns new value to the object and recalculates length
-
-    virtual void serialize();
-    virtual void deserialize(const std::vector<char> &buffer);
-
-    int getNumber() { return number; }
+    ASNInteger(int n=0): ASNIntEnum(2, n) {}
 };
 
 #endif // ASNINTEGER_H

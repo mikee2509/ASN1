@@ -45,22 +45,34 @@ TEST(ASNIntegerTests, serializeTest)
     vector<char> aVect = a.getData();
     string aStr(aVect.begin(), aVect.end());
     EXPECT_EQ(aStr, "000000100000000100010000");
+    EXPECT_EQ(a.getTag(), 2);
+    EXPECT_EQ(a.getLength(), 1);
+    EXPECT_EQ(a.getData(), aVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
 
     a = 13565;
     aVect = a.getData();
     aStr.assign(aVect.begin(), aVect.end());
     EXPECT_EQ(aStr, "00000010000000100011010011111101");
+    EXPECT_EQ(a.getTag(), 2);
+    EXPECT_EQ(a.getLength(), 2);
+    EXPECT_EQ(a.getData(), aVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
 
     a = 8123456;
     aVect = a.getData();
     aStr.assign(aVect.begin(), aVect.end());
     EXPECT_EQ(aStr, "0000001000000011011110111111010001000000");
+    EXPECT_EQ(a.getLength(), 3);
 
     a = 1234567890;
     ASNInteger newA(a);
     aVect = newA.getData();
     aStr.assign(aVect.begin(), aVect.end());
     EXPECT_EQ(aStr, "000000100000010001001001100101100000001011010010");
+    EXPECT_EQ(a.getLength(), 4);
 }
 
 TEST(ASNIntegerTests, deserializeTest)
@@ -185,6 +197,75 @@ TEST(ASNBitstringTests, deserializeTest)
     EXPECT_EQ(str.getLength(), 4);
     EXPECT_EQ(str.getConstructed(), false);
     EXPECT_EQ(str.getIndefinite(), false);
+}
+
+TEST(ASNEnumeratedTests, serializeTest)
+{
+    ASNEnumerated a(16);
+    vector<char> aVect = a.getData();
+    string aStr(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "000010100000000100010000");
+    EXPECT_EQ(a.getTag(), 10);
+    EXPECT_EQ(a.getLength(), 1);
+    EXPECT_EQ(a.getData(), aVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
+
+    a = 13565;
+    aVect = a.getData();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "00001010000000100011010011111101");
+    EXPECT_EQ(a.getTag(), 10);
+    EXPECT_EQ(a.getLength(), 2);
+    EXPECT_EQ(a.getData(), aVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
+
+    a = 8123456;
+    aVect = a.getData();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "0000101000000011011110111111010001000000");
+    EXPECT_EQ(a.getLength(), 3);
+
+    a = 1234567890;
+    ASNEnumerated newA(a);
+    aVect = newA.getData();
+    aStr.assign(aVect.begin(), aVect.end());
+    EXPECT_EQ(aStr, "000010100000010001001001100101100000001011010010");
+    EXPECT_EQ(a.getLength(), 4);
+}
+
+TEST(ASNEnumeratedTests, deserializeTest)
+{
+    ASNEnumerated a;
+    vector<char> aVect {'0','0','0','0','1','0','1','0',
+                        '0','0','0','0','0','0','0','1',
+                        '0','0','0','1','0','0','0','0'};
+    vector<char> bVect = aVect;
+    bVect.push_back('1');
+    a.deserialize(bVect);
+    EXPECT_EQ(a.getNumber(), 16);
+    EXPECT_EQ(a.getTag(), 10);
+    EXPECT_EQ(a.getLength(), 1);
+    EXPECT_EQ(a.getData(), aVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
+
+
+    vector<char> cVect {'0','0','0','0','1','0','1','0',
+                        '0','0','0','0','0','1','0','0',
+                        '0','1','0','0','1','0','0','1',
+                        '1','0','0','1','0','1','1','0',
+                        '0','0','0','0','0','0','1','0',
+                        '1','1','0','1','0','0','1','0', '1'};
+    a.deserialize(cVect);
+    cVect.pop_back();
+    EXPECT_EQ(a.getNumber(), 1234567890);
+    EXPECT_EQ(a.getTag(), 10);
+    EXPECT_EQ(a.getLength(), 4);
+    EXPECT_EQ(a.getData(), cVect);
+    EXPECT_EQ(a.getConstructed(), false);
+    EXPECT_EQ(a.getIndefinite(), false);
 }
 
 
