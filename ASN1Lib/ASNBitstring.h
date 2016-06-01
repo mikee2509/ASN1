@@ -4,9 +4,9 @@
 #include "ASNObject.h"
 
 //! ASN.1 BITSTRING data type
-class ASNBitstring : public ASNObject
+class ASNBitstring : virtual public ASNObject
 {
-private:
+protected:
     std::string str; //!< Stored bitstring
 
     void setLength(const std::string &bitstr); //!< Calculates length from bitstring passed in argument

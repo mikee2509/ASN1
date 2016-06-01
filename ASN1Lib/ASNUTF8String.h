@@ -4,9 +4,9 @@
 #include "ASNObject.h"
 
 //! ASN.1 UTF8String data type
-class ASNUTF8String : public ASNObject
+class ASNUTF8String : virtual public ASNObject
 {
-private:
+protected:
     std::string str; //!< Stored string
 public:
     //! Standard constructor

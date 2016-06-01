@@ -4,9 +4,9 @@
 #include "ASNObject.h"
 
 //! ASN.1 INTEGER data type
-class ASNInteger : public ASNObject
+class ASNInteger : virtual public ASNObject
 {
-private:
+protected:
     int number; //!< Decimal integer
 
     void setLength(int decimalNum); //!< Calculates length from decimal number passed in argument

@@ -16,6 +16,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="interfaces" />
 				</Compiler>
 				<Linker>
 					<Add library="user32" />
@@ -31,6 +32,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-O2" />
+					<Add directory="interfaces" />
 				</Compiler>
 				<Linker>
 					<Add library="user32" />
@@ -48,6 +50,10 @@
 		<Unit filename="ASNObject.h" />
 		<Unit filename="ASNUTF8String.cpp" />
 		<Unit filename="ASNUTF8String.h" />
+		<Unit filename="interfaces/IASNInteger.cpp" />
+		<Unit filename="interfaces/IASNInteger.h" />
+		<Unit filename="interfaces/IDisplayable.cpp" />
+		<Unit filename="interfaces/IDisplayable.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

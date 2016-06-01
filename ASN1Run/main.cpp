@@ -6,10 +6,9 @@ int main()
 {
     try
     {
-        string lols = "a";
-        ASNUTF8String nowy(lols);
-        vector<char> temp = nowy.getData();
-        for_each(temp.begin(), temp.end(), [](char i)->void { cout<<i; });
+        string test("111000110");
+        IASNBitstring two(test);
+        two.printAll();
     }
     catch (exception &e)
     {

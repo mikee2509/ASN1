@@ -16,6 +16,7 @@ protected:
     bool isConstructed; //!< Whether the contents octets contain 0, 1, or more element encodings
     bool isIndefinite; //!< Whether the length is defined or the content octets finish at marker octets
 public:
+    virtual ~ASNObject() {}
     //! Encodes tag, length and value of ASN.1 Object according to BER standard.
     /*! The results are saved in *data* vector. */
     virtual void serialize() = 0;
