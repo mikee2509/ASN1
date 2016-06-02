@@ -268,6 +268,140 @@ TEST(ASNEnumeratedTests, deserializeTest)
     EXPECT_EQ(a.getIndefinite(), false);
 }
 
+TEST(ASNSequenceTests, serializeTest)
+{
+    string str = "John";
+    string bitstr = "10101010111100001";
+    shared_ptr<ASNObject> i1(new IASNInteger(1));
+    shared_ptr<ASNObject> e2(new IASNEnumerated(256));
+    shared_ptr<ASNObject> s3(new ASNUTF8String(str));
+    shared_ptr<ASNObject> b4(new ASNBitstring(bitstr));
+
+    vector<shared_ptr<ASNObject>> container;
+
+    container.push_back(i1);
+    container.push_back(e2);
+    container.push_back(s3);
+    container.push_back(b4);
+
+    ASNSequence one(container);
+
+    vector<char> test  {'0','0','1','1','0','0','0','0',
+                        '0','0','0','1','0','0','1','1',
+
+                        '0','0','0','0','0','0','1','0',
+                        '0','0','0','0','0','0','0','1',
+                        '0','0','0','0','0','0','0','1',
+
+                        '0','0','0','0','1','0','1','0',
+                        '0','0','0','0','0','0','1','0',
+                        '0','0','0','0','0','0','0','1',
+                        '0','0','0','0','0','0','0','0',
+
+                        '0','0','0','0','1','1','0','0',
+                        '0','0','0','0','0','1','0','0',
+                        '0','1','0','0','1','0','1','0',
+                        '0','1','1','0','1','1','1','1',
+                        '0','1','1','0','1','0','0','0',
+                        '0','1','1','0','1','1','1','0',
+
+                        '0','0','0','0','0','0','1','1',
+                        '0','0','0','0','0','1','0','0',
+                        '0','0','0','0','0','1','1','1',
+                        '1','0','1','0','1','0','1','0',
+                        '1','1','1','1','0','0','0','0',
+                        '1','0','0','0','0','0','0','0'};
+
+    EXPECT_EQ(one.getData(), test);
+    EXPECT_EQ(one.getLength(), 19);
+    EXPECT_EQ(one.getTag(), 16);
+    EXPECT_EQ(one.getConstructed(), true);
+    EXPECT_EQ(one.getIndefinite(), false);
+}
+
+TEST(ASNSequenceTests, deserializeTest)
+{
+    vector<char> test  {'0','0','1','1','0','0','0','0',
+                        '0','0','0','1','0','0','1','1',
+
+                        '0','0','0','0','0','0','1','0',
+                        '0','0','0','0','0','0','0','1',
+                        '0','0','0','0','0','0','0','1',
+
+                        '0','0','0','0','1','0','1','0',
+                        '0','0','0','0','0','0','1','0',
+                        '0','0','0','0','0','0','0','1',
+                        '0','0','0','0','0','0','0','0',
+
+                        '0','0','0','0','1','1','0','0',
+                        '0','0','0','0','0','1','0','0',
+                        '0','1','0','0','1','0','1','0',
+                        '0','1','1','0','1','1','1','1',
+                        '0','1','1','0','1','0','0','0',
+                        '0','1','1','0','1','1','1','0',
+
+                        '0','0','0','0','0','0','1','1',
+                        '0','0','0','0','0','1','0','0',
+                        '0','0','0','0','0','1','1','1',
+                        '1','0','1','0','1','0','1','0',
+                        '1','1','1','1','0','0','0','0',
+                        '1','0','0','0','0','0','0','0'};
+    ASNSequence one;
+    one.deserialize(test);
+    EXPECT_EQ(one.getData(), test);
+    EXPECT_EQ(one.getLength(), 19);
+    EXPECT_EQ(one.getTag(), 16);
+    EXPECT_EQ(one.getConstructed(), true);
+    EXPECT_EQ(one.getIndefinite(), false);
+
+
+    vector<char> i1 {'0','0','0','0','0','0','1','0',
+                     '0','0','0','0','0','0','0','1',
+                     '0','0','0','0','0','0','0','1'};
+
+    EXPECT_EQ(one.getObjects()[0]->getData(), i1);
+    EXPECT_EQ(one.getObjects()[0]->getTag(), 2);
+    EXPECT_EQ(one.getObjects()[0]->getLength(), 1);
+    EXPECT_EQ(dynamic_pointer_cast<ASNInteger>(one.getObjects()[0])->getNumber(), 1);
+
+
+    vector<char> e2 {'0','0','0','0','1','0','1','0',
+                     '0','0','0','0','0','0','1','0',
+                     '0','0','0','0','0','0','0','1',
+                     '0','0','0','0','0','0','0','0'};
+
+    EXPECT_EQ(one.getObjects()[1]->getData(), e2);
+    EXPECT_EQ(one.getObjects()[1]->getTag(), 10);
+    EXPECT_EQ(one.getObjects()[1]->getLength(), 2);
+    EXPECT_EQ(dynamic_pointer_cast<ASNEnumerated>(one.getObjects()[1])->getNumber(), 256);
+
+
+    vector<char> s3 {'0','0','0','0','1','1','0','0',
+                     '0','0','0','0','0','1','0','0',
+                     '0','1','0','0','1','0','1','0',
+                     '0','1','1','0','1','1','1','1',
+                     '0','1','1','0','1','0','0','0',
+                     '0','1','1','0','1','1','1','0'};
+
+    EXPECT_EQ(one.getObjects()[2]->getData(), s3);
+    EXPECT_EQ(one.getObjects()[2]->getTag(), 12);
+    EXPECT_EQ(one.getObjects()[2]->getLength(), 4);
+    EXPECT_EQ(dynamic_pointer_cast<ASNUTF8String>(one.getObjects()[2])->getStr(), string("John"));
+
+
+    vector<char> b4 {'0','0','0','0','0','0','1','1',
+                     '0','0','0','0','0','1','0','0',
+                     '0','0','0','0','0','1','1','1',
+                     '1','0','1','0','1','0','1','0',
+                     '1','1','1','1','0','0','0','0',
+                     '1','0','0','0','0','0','0','0'};
+
+    EXPECT_EQ(one.getObjects()[3]->getData(), b4);
+    EXPECT_EQ(one.getObjects()[3]->getTag(), 3);
+    EXPECT_EQ(one.getObjects()[3]->getLength(), 4);
+    EXPECT_EQ(dynamic_pointer_cast<ASNBitstring>(one.getObjects()[3])->getStr(), string("10101010111100001"));
+}
+
 
 
 

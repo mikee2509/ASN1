@@ -50,6 +50,8 @@
 		<Unit filename="ASNInteger.h" />
 		<Unit filename="ASNObject.cpp" />
 		<Unit filename="ASNObject.h" />
+		<Unit filename="ASNSequence.cpp" />
+		<Unit filename="ASNSequence.h" />
 		<Unit filename="ASNUTF8String.cpp" />
 		<Unit filename="ASNUTF8String.h" />
 		<Unit filename="interfaces/IASNBitstring.cpp" />

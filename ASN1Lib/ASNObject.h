@@ -5,6 +5,8 @@
 #include <bitset>
 #include <exception>
 #include <algorithm>
+#include <memory>
+#include <iterator>
 
 //! Base class for all ASN.1 structures
 class ASNObject
