@@ -15,6 +15,6 @@
 #include "../ASN1Lib/interfaces/IASNUTF8String.h"
 #include "../ASN1Lib/interfaces/IASNBitstring.h"
 #include "../ASN1Lib/interfaces/IASNEnumerated.h"
-
+#include "../ASN1Lib/interfaces/IASNSequence.h"
 
 #endif // MAIN_H_INCLUDED

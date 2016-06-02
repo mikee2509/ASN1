@@ -274,8 +274,8 @@ TEST(ASNSequenceTests, serializeTest)
     string bitstr = "10101010111100001";
     shared_ptr<ASNObject> i1(new IASNInteger(1));
     shared_ptr<ASNObject> e2(new IASNEnumerated(256));
-    shared_ptr<ASNObject> s3(new ASNUTF8String(str));
-    shared_ptr<ASNObject> b4(new ASNBitstring(bitstr));
+    shared_ptr<ASNObject> s3(new IASNUTF8String(str));
+    shared_ptr<ASNObject> b4(new IASNBitstring(bitstr));
 
     vector<shared_ptr<ASNObject>> container;
 

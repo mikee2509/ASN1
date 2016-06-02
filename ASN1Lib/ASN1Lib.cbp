@@ -60,6 +60,8 @@
 		<Unit filename="interfaces/IASNEnumerated.h" />
 		<Unit filename="interfaces/IASNInteger.cpp" />
 		<Unit filename="interfaces/IASNInteger.h" />
+		<Unit filename="interfaces/IASNSequence.cpp" />
+		<Unit filename="interfaces/IASNSequence.h" />
 		<Unit filename="interfaces/IASNUTF8String.cpp" />
 		<Unit filename="interfaces/IASNUTF8String.h" />
 		<Unit filename="interfaces/IDisplayable.cpp" />

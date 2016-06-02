@@ -11,7 +11,7 @@
 
 class ASNSequence : virtual public ASNObject
 {
-private:
+protected:
     std::vector<std::shared_ptr<ASNObject>> objects;
 
     void setLength(std::vector<std::shared_ptr<ASNObject>> &ptrvec);
