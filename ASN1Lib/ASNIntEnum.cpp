@@ -52,6 +52,10 @@ void ASNIntEnum::serialize()
 
 void ASNIntEnum::deserialize(const vector<char> &buffer)
 {
+    if(buffer.size()<16) {
+            if(tag==2) throw unexpected_end("ASN.1 Integer error: input ends unexpectedly");
+            if(tag==10) throw unexpected_end("ASN.1 Enumerated error: input ends unexpectedly");
+    }
     int initialLength = length;
 
     vector<char> initialOctets(buffer.begin(), buffer.begin()+16);
@@ -61,13 +65,23 @@ void ASNIntEnum::deserialize(const vector<char> &buffer)
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 INTEGER cannot be constructed");
+        if(tag==2) throw argument_error("ASN.1 INTEGER cannot be constructed");
+        if(tag==10) throw argument_error("ASN.1 Enumerated cannot be constructed");
     }
     if(isIndefinite) {
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 INTEGER must be of definite length");
+        if(tag==2) throw argument_error("ASN.1 INTEGER must be of definite length");
+        if(tag==10) throw argument_error("ASN.1 Enumerated must be of definite length");
+    }
+    if(buffer.size()<16+8*(unsigned)length)
+    {
+        length = initialLength;
+        isConstructed = 0;
+        isIndefinite = 0;
+        if(tag==2) throw unexpected_end("ASN.1 INTEGER error: input ends unexpectedly");
+        if(tag==10) throw unexpected_end("ASN.1 INTEGER error: input ends unexpectedly");
     }
 
     vector<char> dataOctets(buffer.begin()+16, buffer.begin()+16+8*length);

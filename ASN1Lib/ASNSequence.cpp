@@ -42,8 +42,8 @@ void ASNSequence::serialize()
 void ASNSequence::readTags(const vector<char> &code, int& tag, int& length)
 {
     if(any_of(code.begin(), code.end(), [](char i){ return (i!='0' && i!='1'); } ))
-        throw invalid_argument("Unrecognised character");
-    if(code[0]!='0' || code[1]!='0') throw invalid_argument("Only types native to ASN.1 accepted");
+        throw argument_error("Unrecognised character");
+    if(code[0]!='0' || code[1]!='0') throw argument_error("Only types native to ASN.1 accepted");
 
     bitset<5> bintag;
     for(int i=3, j=4; i<8; i++, j--)
@@ -58,11 +58,32 @@ void ASNSequence::readTags(const vector<char> &code, int& tag, int& length)
 
 void ASNSequence::deserialize(const vector<char>& buffer)
 {
-    objects.clear();
+    if(buffer.size()<16) throw unexpected_end("ASN.1 Sequence error: input ends unexpectedly");
+    int initialLength = length;
 
     vector<char> initialOctets(buffer.begin(), buffer.begin()+16);
     taglength(initialOctets);
+    if(!isConstructed) {
+        length = initialLength;
+        isConstructed = 1;
+        isIndefinite = 0;
+        throw argument_error("ASN.1 Sequence must be constructed");
+    }
+    if(isIndefinite) {
+        length = initialLength;
+        isConstructed = 1;
+        isIndefinite = 0;
+        throw argument_error("ASN.1 Sequence must be of definite length");
+    }
+    if(buffer.size()!=16+8*(unsigned)length)
+    {
+        length = initialLength;
+        isConstructed = 1;
+        isIndefinite = 0;
+        throw unexpected_end("ASN.1 Sequence error: wrong input size");
+    }
 
+    objects.clear();
     data = vector<char>(initialOctets.begin(), initialOctets.end());
 
     vector<char>::const_iterator it = buffer.begin()+16;
@@ -105,7 +126,7 @@ void ASNSequence::deserialize(const vector<char>& buffer)
             }
             default:
             {
-                throw invalid_argument("Unsupported data type. Only INTEGER, ENUMERATED, UTF8String and Bitstring accepted.");
+                throw argument_error("Unsupported data type. Only INTEGER, ENUMERATED, UTF8String and Bitstring accepted.");
                 break;
             }
         }

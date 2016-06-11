@@ -112,14 +112,26 @@ TEST(ASNUTF8StringTests, serializeTest)
 {
     string emptyStr = "";
     ASNUTF8String str(emptyStr);
-    str = string("John");
+
     vector<char> test  {'0','0','0','0','1','1','0','0',
+                        '0','0','0','0','0','0','0','0'};
+
+    EXPECT_EQ(str.getData(), test);
+    EXPECT_EQ(str.getStr(), string(""));
+    EXPECT_EQ(str.getTag(), 12);
+    EXPECT_EQ(str.getLength(), 0);
+    EXPECT_EQ(str.getConstructed(), false);
+    EXPECT_EQ(str.getIndefinite(), false);
+
+
+    str = string("John");
+    vector<char> test2  {'0','0','0','0','1','1','0','0',
                         '0','0','0','0','0','1','0','0',
                         '0','1','0','0','1','0','1','0',
                         '0','1','1','0','1','1','1','1',
                         '0','1','1','0','1','0','0','0',
                         '0','1','1','0','1','1','1','0'};
-    EXPECT_EQ(str.getData(), test);
+    EXPECT_EQ(str.getData(), test2);
     EXPECT_EQ(str.getStr(), string("John"));
     EXPECT_EQ(str.getTag(), 12);
     EXPECT_EQ(str.getLength(), 4);
@@ -132,15 +144,25 @@ TEST(ASNUTF8StringTests, deserializeTest)
     string temp;
     ASNUTF8String str(temp);
     vector<char> test  {'0','0','0','0','1','1','0','0',
+                        '0','0','0','0','0','0','0','0'};
+    str.deserialize(test);
+    EXPECT_EQ(str.getStr(), string(""));
+    EXPECT_EQ(str.getData(), test);
+    EXPECT_EQ(str.getTag(), 12);
+    EXPECT_EQ(str.getLength(), 0);
+    EXPECT_EQ(str.getConstructed(), false);
+    EXPECT_EQ(str.getIndefinite(), false);
+
+    vector<char> test2 {'0','0','0','0','1','1','0','0',
                         '0','0','0','0','0','1','0','0',
                         '0','1','0','0','1','1','0','1',
                         '0','1','1','0','1','0','0','1',
                         '0','1','1','0','1','0','1','1',
                         '0','1','1','0','0','1','0','1', '1'};
-    str.deserialize(test);
-    test.pop_back();
+    str.deserialize(test2);
+    test2.pop_back();
     EXPECT_EQ(str.getStr(), string("Mike"));
-    EXPECT_EQ(str.getData(), test);
+    EXPECT_EQ(str.getData(), test2);
     EXPECT_EQ(str.getTag(), 12);
     EXPECT_EQ(str.getLength(), 4);
     EXPECT_EQ(str.getConstructed(), false);

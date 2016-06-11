@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <memory>
 #include <iterator>
+#include "exceptions.h"
 
 //! Base class for all ASN.1 structures
 class ASNObject

@@ -54,6 +54,7 @@
 		<Unit filename="ASNSequence.h" />
 		<Unit filename="ASNUTF8String.cpp" />
 		<Unit filename="ASNUTF8String.h" />
+		<Unit filename="exceptions.h" />
 		<Unit filename="interfaces/IASNBitstring.cpp" />
 		<Unit filename="interfaces/IASNBitstring.h" />
 		<Unit filename="interfaces/IASNEnumerated.cpp" />

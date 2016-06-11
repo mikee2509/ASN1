@@ -23,6 +23,7 @@ ASNUTF8String ASNUTF8String::operator=(const string& newstr)
 
 void ASNUTF8String::deserialize(const vector<char>& buffer)
 {
+    if(buffer.size()<16) throw unexpected_end("ASN.1 UTF8String error: input ends unexpectedly");
     int initialLength = length;
 
     vector<char> initialOctets(buffer.begin(), buffer.begin()+16);
@@ -32,13 +33,20 @@ void ASNUTF8String::deserialize(const vector<char>& buffer)
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 UTF8String cannot be constructed");
+        throw argument_error("ASN.1 UTF8String cannot be Constructed");
     }
     if(isIndefinite) {
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 UTF8String must be of definite length");
+        throw argument_error("ASN.1 UTF8String must be of definite length");
+    }
+    if(buffer.size()<16+8*(unsigned)length)
+    {
+        length = initialLength;
+        isConstructed = 0;
+        isIndefinite = 0;
+        throw unexpected_end("ASN.1 UTF8String error: input ends unexpectedly");
     }
 
     str.clear();

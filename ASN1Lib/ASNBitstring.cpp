@@ -12,7 +12,7 @@ void ASNBitstring::setLength(const string& bitstr)
 void ASNBitstring::strCheck(const std::string& bitstr)
 {
     if(any_of(bitstr.begin(), bitstr.end(), [](char i){ return (i!='0' && i!='1'); } ))
-        throw invalid_argument("Unrecognised character in bitstring");
+        throw argument_error("Unrecognised character in bitstring");
 }
 
 ASNBitstring::ASNBitstring(const string& newstr)
@@ -48,6 +48,7 @@ void ASNBitstring::serialize()
 
 void ASNBitstring::deserialize(const vector<char>& buffer)
 {
+    if(buffer.size()<16) throw unexpected_end("ASN.1 Bitstring error: input ends unexpectedly");
     int initialLength = length;
 
     vector<char> initialOctets(buffer.begin(), buffer.begin()+16);
@@ -57,20 +58,27 @@ void ASNBitstring::deserialize(const vector<char>& buffer)
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 Bitstring cannot be constructed");
+        throw argument_error("ASN.1 Bitstring cannot be constructed");
     }
     if(isIndefinite) {
         length = initialLength;
         isConstructed = 0;
         isIndefinite = 0;
-        throw invalid_argument("ASN.1 Bitstring must be of definite length");
+        throw argument_error("ASN.1 Bitstring must be of definite length");
+    }
+    if(buffer.size()<16+8*(unsigned)length)
+    {
+        length = initialLength;
+        isConstructed = 0;
+        isIndefinite = 0;
+        throw unexpected_end("ASN.1 Bitstring error: input ends unexpectedly");
     }
 
     strCheck(string(buffer.begin()+16, buffer.end()));
 
     string binoffset(buffer.begin()+16, buffer.begin()+24);
     int offset = bitset<8>(binoffset).to_ulong();
-    if(offset<0 || offset>8) throw invalid_argument("Invalid offset value");
+    if(offset<0 || offset>8) throw argument_error("Invalid offset value");
 
     data = vector<char>(buffer.begin(), buffer.begin()+16+8*length);
     str = string(buffer.begin()+24, buffer.begin()+24+8*(length-1)-offset);
