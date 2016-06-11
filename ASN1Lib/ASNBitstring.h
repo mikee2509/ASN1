@@ -12,6 +12,7 @@ protected:
     void setLength(const std::string &bitstr); //!< Calculates length from bitstring passed in argument
     void strCheck(const std::string &bitstr); //!< Checks whether *bitstr* have other characters than 1 or 0, if so an exception is thrown
 public:
+    virtual ~ASNBitstring() {}
     //! Standard constructor
     /*! Creates new object with appropriate length
         \param newstr : bitstring to be saved in object */

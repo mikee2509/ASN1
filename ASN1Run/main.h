@@ -9,8 +9,10 @@
 #include "../ASN1Lib/ASNEnumerated.h"
 #include "../ASN1Lib/ASNIntEnum.h"
 #include "../ASN1Lib/ASNSequence.h"
+#include "../ASN1Lib/exceptions.h"
 
 #include "../ASN1Lib/interfaces/IDisplayable.h"
+#include "../ASN1Lib/interfaces/IStorable.h"
 #include "../ASN1Lib/interfaces/IASNInteger.h"
 #include "../ASN1Lib/interfaces/IASNUTF8String.h"
 #include "../ASN1Lib/interfaces/IASNBitstring.h"

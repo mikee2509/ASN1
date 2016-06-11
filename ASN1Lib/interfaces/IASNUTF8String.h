@@ -2,9 +2,10 @@
 #define IASNUTF8STRING_H
 
 #include "IDisplayable.h"
+#include "IStorable.h"
 #include "../ASNUTF8String.h"
 
-class IASNUTF8String : public IDisplayable, public ASNUTF8String
+class IASNUTF8String : public IDisplayable, public IStorable, public ASNUTF8String
 {
 public:
     IASNUTF8String(std::string &str): ASNUTF8String(str) {}

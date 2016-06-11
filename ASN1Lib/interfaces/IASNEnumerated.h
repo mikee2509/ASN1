@@ -2,9 +2,10 @@
 #define IASNENUMERATED_H
 
 #include "IDisplayable.h"
+#include "IStorable.h"
 #include "../ASNEnumerated.h"
 
-class IASNEnumerated : public IDisplayable, public ASNEnumerated
+class IASNEnumerated : public IDisplayable, public IStorable, public ASNEnumerated
 {
 public:
     IASNEnumerated(int i=0): ASNEnumerated(i) {}

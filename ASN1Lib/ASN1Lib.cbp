@@ -67,6 +67,8 @@
 		<Unit filename="interfaces/IASNUTF8String.h" />
 		<Unit filename="interfaces/IDisplayable.cpp" />
 		<Unit filename="interfaces/IDisplayable.h" />
+		<Unit filename="interfaces/IStorable.cpp" />
+		<Unit filename="interfaces/IStorable.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

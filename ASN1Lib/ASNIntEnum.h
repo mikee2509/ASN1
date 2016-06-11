@@ -21,6 +21,7 @@ protected:
     ASNIntEnum operator=(int newValue); //!< Assigns new value to the object and recalculates length
 
 public:
+    virtual ~ASNIntEnum() {}
     virtual void serialize();
     virtual void deserialize(const std::vector<char> &buffer);
 

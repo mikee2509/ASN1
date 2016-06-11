@@ -6,6 +6,7 @@
 class IDisplayable : virtual public ASNObject
 {
 public:
+    virtual ~IDisplayable() {}
     virtual void printAll() = 0;
     virtual void printData();
     virtual void printTag();

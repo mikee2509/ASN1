@@ -17,6 +17,7 @@ protected:
     void setLength(std::vector<std::shared_ptr<ASNObject>> &ptrvec);
     void readTags(const std::vector<char> &code, int &tag, int &length);
 public:
+    virtual ~ASNSequence() {}
     ASNSequence();
     ASNSequence(std::vector<std::shared_ptr<ASNObject>> &ptrvec);
 

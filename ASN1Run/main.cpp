@@ -6,9 +6,10 @@ int main()
 {
     try
     {
-        string test("111000110");
+        string test("11100011");
         IASNBitstring two(test);
         two.printAll();
+        two.saveData(string("Plikxyz.txt"));
     }
     catch (exception &e)
     {

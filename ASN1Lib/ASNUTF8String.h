@@ -9,6 +9,7 @@ class ASNUTF8String : virtual public ASNObject
 protected:
     std::string str; //!< Stored string
 public:
+    virtual ~ASNUTF8String() {}
     //! Standard constructor
     /*! Creates new object with appropriate length
         \param newstr : string to be saved in object */
