@@ -19,4 +19,6 @@
 #include "../ASN1Lib/interfaces/IASNEnumerated.h"
 #include "../ASN1Lib/interfaces/IASNSequence.h"
 
+#include "Osoba.h"
+
 #endif // MAIN_H_INCLUDED

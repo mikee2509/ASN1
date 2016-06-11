@@ -134,3 +134,11 @@ void ASNSequence::deserialize(const vector<char>& buffer)
         advance(it, 16+8*newLength);
     }
 }
+
+void ASNSequence::push_back(std::shared_ptr<ASNObject>& pushptr)
+{
+    length += 2 + pushptr->getLength();
+    objects.push_back(move(pushptr));
+    serialize();
+}
+

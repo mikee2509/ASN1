@@ -6,10 +6,17 @@ int main()
 {
     try
     {
-        string test("11100011");
-        IASNBitstring two(test);
-        two.printAll();
-        two.saveData(string("Plikxyz.txt"));
+        Osoba student("Michal", "Sieczkowski", 19, 1, "1111");
+        Osoba ktos("Jan", "Kowalski", 56, 1, "1010");
+        Osoba dziewczyna("Joanna", "Mucha", 23, 0, "0111");
+
+        student.wyswietl();
+        ktos.wyswietl();
+        dziewczyna.wyswietl();
+
+        student.saveData("student.txt");
+        dziewczyna.saveHex("dziewczyna.txt");
+        return 0;
     }
     catch (exception &e)
     {

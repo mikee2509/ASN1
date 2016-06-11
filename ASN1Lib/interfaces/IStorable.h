@@ -8,6 +8,7 @@ class IStorable : virtual public ASNObject
 public:
     virtual ~IStorable() {}
     virtual void saveData(const std::string &filename);
+    virtual void saveHex(const std::string &filename);
 };
 
 #endif // ISTORABLE_H

@@ -34,6 +34,8 @@
 			<Add library="..\ASN1Lib\bin\Debug\libASN1Lib.a" />
 			<Add directory="../ASN1Lib/bin/Debug" />
 		</Linker>
+		<Unit filename="Osoba.cpp" />
+		<Unit filename="Osoba.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Extensions>

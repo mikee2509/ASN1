@@ -24,6 +24,7 @@ public:
     virtual void serialize();
     virtual void deserialize(const std::vector<char> &buffer);
 
+    void push_back(std::shared_ptr<ASNObject> &pushptr);
     std::vector<std::shared_ptr<ASNObject>>& getObjects() { return objects; }
 };
 

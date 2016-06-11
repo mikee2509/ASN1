@@ -304,9 +304,9 @@ TEST(ASNSequenceTests, serializeTest)
     container.push_back(i1);
     container.push_back(e2);
     container.push_back(s3);
-    container.push_back(b4);
 
     ASNSequence one(container);
+    one.push_back(b4);
 
     vector<char> test  {'0','0','1','1','0','0','0','0',
                         '0','0','0','1','0','0','1','1',

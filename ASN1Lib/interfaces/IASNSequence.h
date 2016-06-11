@@ -13,6 +13,7 @@ class IASNSequence : public IDisplayable, public IStorable, public ASNSequence
 {
 public:
     IASNSequence(std::vector<std::shared_ptr<ASNObject>> &vec): ASNSequence(vec) {}
+    IASNSequence(): ASNSequence() {}
     void printAll();
     void printObjects();
 };
