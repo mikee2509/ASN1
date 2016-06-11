@@ -5,6 +5,7 @@
 #include "IStorable.h"
 #include "../ASNBitstring.h"
 
+//! Interface class for ASNBitstring
 class IASNBitstring: public IDisplayable, public IStorable, public ASNBitstring
 {
 public:

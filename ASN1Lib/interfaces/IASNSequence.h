@@ -9,6 +9,7 @@
 #include "IASNBitstring.h"
 #include "IASNEnumerated.h"
 
+//! Interface class for ASNSequence
 class IASNSequence : public IDisplayable, public IStorable, public ASNSequence
 {
 public:

@@ -38,6 +38,9 @@ doxygen/
 *.a
 *.lib
 
+# Text files
+*.txt
+
 # Executables
 *.exe
 *.out

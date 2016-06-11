@@ -3,7 +3,7 @@
 
 #include "ASNObject.h"
 
-//! Base class for ASN.1 INTEGER and ENUMERATED data types
+//! Base class for ASN.1 Integer and Enumerated data structures
 class ASNIntEnum : virtual public ASNObject
 {
 protected:
@@ -25,7 +25,7 @@ public:
     virtual void serialize();
     virtual void deserialize(const std::vector<char> &buffer);
 
-    int getNumber() { return number; }
+    int getNumber() { return number; } //!< Returns the decimal number stored in object
 };
 
 #endif // ASNINTENUM_H

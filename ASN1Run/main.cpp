@@ -1,5 +1,10 @@
 #include "main.h"
-
+/*! \mainpage Project 3 documentation
+ *  \section intro_sec ASN.1 Encoder and Decoder
+ *    Library of classes for easy encoding and decoding ASN.1 data structures using BER format.
+ * \author Michal Sieczkowski
+ * \date 11.06.2016
+ */
 using namespace std;
 
 int main()

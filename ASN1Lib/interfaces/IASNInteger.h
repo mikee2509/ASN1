@@ -5,6 +5,7 @@
 #include "IStorable.h"
 #include "../ASNInteger.h"
 
+//! Interface class for ASNInteger
 class IASNInteger : public IDisplayable, public IStorable, public ASNInteger
 {
 public:

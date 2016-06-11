@@ -3,7 +3,7 @@
 
 #include "ASNObject.h"
 
-//! ASN.1 BITSTRING data type
+//! ASN.1 Bitstring data structure
 class ASNBitstring : virtual public ASNObject
 {
 protected:
@@ -23,7 +23,7 @@ public:
     virtual void serialize();
     virtual void deserialize(const std::vector<char> &buffer);
 
-    std::string getStr() { return str; }
+    std::string getStr() { return str; } //!< Returns the stored bitsting
 };
 
 #endif // ASNBITSTRING_H

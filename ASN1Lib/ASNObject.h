@@ -9,11 +9,11 @@
 #include <iterator>
 #include "exceptions.h"
 
-//! Base class for all ASN.1 structures
+//! Base class for all ASN.1 data structures
 class ASNObject
 {
 protected:
-    std::vector<char> data;
+    std::vector<char> data; //!< Binary data
     int tag; //!< ASN.1 data type tag
     int length; //!< Number of octets used to encode the data
     bool isConstructed; //!< Whether the contents octets contain 0, 1, or more element encodings
@@ -35,11 +35,11 @@ public:
     /*! Function modifies *length*, *isConstructed* and *isIndefinite* values. */
     void taglength(const std::vector<char> &code);
 
-    int getLength() { return length; }
-    int getTag() { return tag; }
-    std::vector<char> getData() { return data; }
-    bool getConstructed() { return isConstructed; }
-    bool getIndefinite() { return isIndefinite; }
+    int getLength() { return length; } //!< Returns number of octets used to encode data
+    int getTag() { return tag; } //!< Returns data type tag
+    std::vector<char> getData() { return data; } //!< Returns binary data
+    bool getConstructed() { return isConstructed; } //!< Returns *true* if the object is constructed and *false* if it is primitive
+    bool getIndefinite() { return isIndefinite; } //!< Returns *true* if the object is of indefinite length and *false* otherwise
 };
 
 #endif // ASNOBJECT_H

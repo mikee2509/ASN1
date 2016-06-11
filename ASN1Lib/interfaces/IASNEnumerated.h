@@ -5,6 +5,7 @@
 #include "IStorable.h"
 #include "../ASNEnumerated.h"
 
+//! Interface class for ASNEnumerated
 class IASNEnumerated : public IDisplayable, public IStorable, public ASNEnumerated
 {
 public:

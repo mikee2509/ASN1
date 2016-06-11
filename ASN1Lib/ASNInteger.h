@@ -3,7 +3,7 @@
 
 #include "ASNIntEnum.h"
 
-//! ASN.1 INTEGER data type
+//! ASN.1 Integer data structure
 class ASNInteger : public ASNIntEnum
 {
 public:

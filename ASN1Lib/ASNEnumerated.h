@@ -3,7 +3,7 @@
 
 #include "ASNIntEnum.h"
 
-//! ASN.1 ENUMERATED data type
+//! ASN.1 Enumerated data structure
 class ASNEnumerated : public ASNIntEnum
 {
 public:

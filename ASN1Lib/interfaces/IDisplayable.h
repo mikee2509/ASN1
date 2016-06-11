@@ -3,6 +3,7 @@
 
 #include "../ASNObject.h"
 
+//! Base class for all interfaces of ASNObject's subclasses
 class IDisplayable : virtual public ASNObject
 {
 public:

@@ -5,6 +5,7 @@
 #include "IStorable.h"
 #include "../ASNUTF8String.h"
 
+//! Interface class for ASNUTF8String
 class IASNUTF8String : public IDisplayable, public IStorable, public ASNUTF8String
 {
 public:
